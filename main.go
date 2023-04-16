@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
 	"net"
 	"net/http"
@@ -9,12 +10,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//go:embed resources/labelzoom_logo.txt
+var logo string
+
 type printjob struct {
 	PrinterHostname string `json:"printerHostname"`
 	Text            string `json:"text"`
 }
 
 func main() {
+	fmt.Println(logo)
 	r := gin.Default()
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"https://labelzoom.net", "https://www.labelzoom.net", "http://local.labelzoom.net", "http://localhost", "http://localhost:3000"},
