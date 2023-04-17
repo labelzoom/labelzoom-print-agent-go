@@ -24,7 +24,7 @@ func main() {
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"https://labelzoom.net", "https://www.labelzoom.net", "http://local.labelzoom.net", "http://localhost", "http://localhost:3000"},
 		AllowMethods: []string{"POST"},
-		AllowHeaders: []string{"Origin"},
+		AllowHeaders: []string{"Origin"}, // TODO: Acess to fetch at 'http://localhost:8080/print' from origin 'http://localhost:3000' has been blocked by CORS policy: Request header field content-type is not allowed by Access-Control-Allow-Headers in preflight response.
 		// ExposeHeaders:    []string{"Content-Length"},
 		// AllowCredentials: true,
 		// AllowOriginFunc: func(origin string) bool {
