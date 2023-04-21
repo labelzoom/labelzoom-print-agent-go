@@ -57,6 +57,7 @@ func handlePrint(c *gin.Context) {
 func main() {
 	fmt.Println(logo)
 	r := gin.Default()
+	r.SetTrustedProxies([]string{"127.0.0.1", "::1"})
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"https://labelzoom.net", "https://www.labelzoom.net", "http://local.labelzoom.net", "http://localhost", "http://localhost:3000"},
 		AllowMethods: []string{"POST"},
