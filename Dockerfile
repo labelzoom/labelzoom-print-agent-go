@@ -15,7 +15,7 @@ COPY *.go ./
 COPY resources/ ./resources/
 
 # Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o /lz-print-agent-go
+RUN CGO_ENABLED=0 GOOS=linux go build -o /lz-print-agent-local
 
 # Optional:
 # To bind to a TCP port, runtime parameters must be supplied to the docker command.
@@ -25,4 +25,4 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /lz-print-agent-go
 EXPOSE 8080
 
 # Run
-CMD ["/lz-print-agent-go"]
+CMD ["/lz-print-agent-local"]
