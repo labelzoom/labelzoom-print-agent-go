@@ -1,28 +1,35 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:1.19
+# Build stage
+FROM golang:1.22-alpine AS builder
+
+# Install build dependencies (if needed)
+RUN apk add --no-cache git
 
 # Set destination for COPY
 WORKDIR /app
 
-# Download Go modules
+# Download Go modules (leverage Docker cache)
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copy the source code. Note the slash at the end, as explained in
-# https://docs.docker.com/engine/reference/builder/#copy
+# Copy the source code
 COPY *.go ./
 COPY resources/ ./resources/
 
-# Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o /lz-print-agent-local
+# Build the application
+# CGO_ENABLED=0 creates a statically linked binary
+# -ldflags="-w -s" strips debug information to reduce binary size
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o /lz-print-agent-local
 
-# Optional:
-# To bind to a TCP port, runtime parameters must be supplied to the docker command.
-# But we can document in the Dockerfile what ports
-# the application is going to listen on by default.
-# https://docs.docker.com/engine/reference/builder/#expose
+# Final stage - use scratch for minimal image
+FROM scratch
+
+# Copy the binary from the builder stage
+COPY --from=builder /lz-print-agent-local /lz-print-agent-local
+
+# Expose the application port
 EXPOSE 8080
 
-# Run
+# Run the application
 CMD ["/lz-print-agent-local"]
