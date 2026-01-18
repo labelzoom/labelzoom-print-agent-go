@@ -1,7 +1,7 @@
 # LabelZoom Print Agent
 
 [![Docker Hub](https://img.shields.io/badge/Docker%20Hub-labelzoom%2Flz--print--agent--local-blue?logo=docker)](https://hub.docker.com/r/labelzoom/lz-print-agent-local)
-[![Go Version](https://img.shields.io/badge/Go-1.22-00ADD8?logo=go)](https://go.dev/)
+[![Go Version](https://img.shields.io/badge/Go-1.24-00ADD8?logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 A lightweight local print agent that enables browser-based printing to direct thermal printers when using the [LabelZoom Web App](https://www.labelzoom.net/app). This agent acts as a bridge between your web browser and RAW printers on your local network, allowing fast and accurate reproduction of barcode labels in the printer's native language (such as Zebra ZPL).
@@ -69,7 +69,7 @@ The agent will start on port 8080 by default.
 ## 📋 Requirements
 
 - **Docker** (for containerized deployment) OR
-- **Go 1.22+** (for building from source)
+- **Go 1.24+** (for building from source)
 - **Network access** to your thermal printers (typically port 9100)
 - **Web browser** with access to [LabelZoom Web App](https://www.labelzoom.net/app)
 
